@@ -3,30 +3,30 @@ import java.util.Map;
 
 public class Router implements Runnable {
 
-	private String threadId;
-	String connecterId;
-	int hopLength;
-	Map<String, Integer> linkStataePacket = new HashMap<String, Integer>();
-	public Router(String threadId) {
-		this.threadId = threadId;
+	private String sourceId;
+	String destinationId;
+	int cost;
+	Map<String, Integer> linkStatePacket = new HashMap<String, Integer>();
+	public Router(String sourceId) {
+		this.sourceId = sourceId;
 	}
 	
-	public Router connectsTo(String connecterId) {
-		this.connecterId = connecterId;
+	public Router connectsTo(String destinationId) {
+		this.destinationId = destinationId;
 		return this;
 	}
 	
-	public Router withHopLength(int hopLength) {
-		this.hopLength = hopLength;
+	public Router withHopLength(int cost) {
+		this.cost = cost;
 		return this;
 	}
 	
-	public String nodeId() {
-		return threadId;
+	public String sourceId() {
+		return sourceId;
 	}
 	
 	public Router add() {
-		linkStataePacket.put(connecterId, hopLength);
+		linkStatePacket.put(destinationId, cost);
 		return this;
 	}
 	
