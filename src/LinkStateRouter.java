@@ -70,6 +70,9 @@ public class LinkStateRouter {
 		}
 	}
 
+	private static final String START = "A";
+	private static final String END = "D";
+
 	public static void main(String[] args) {
 		System.out.println("Please enter the routers, recievers, and the number of hops needed from the neighbor.");
 		Scanner scanner = new Scanner(System.in);
