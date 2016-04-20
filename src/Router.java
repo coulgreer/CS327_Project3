@@ -3,10 +3,10 @@ import java.util.Map;
 
 public class Router implements Runnable {
 
-	String threadId;
+	private String threadId;
 	String connecterId;
 	int hopLength;
-	Map<String, Integer> connecters = new HashMap<String, Integer>();
+	Map<String, Integer> linkStataePacket = new HashMap<String, Integer>();
 	public Router(String threadId) {
 		this.threadId = threadId;
 	}
@@ -26,7 +26,7 @@ public class Router implements Runnable {
 	}
 	
 	public Router add() {
-		connecters.put(connecterId, hopLength);
+		linkStataePacket.put(connecterId, hopLength);
 		return this;
 	}
 	

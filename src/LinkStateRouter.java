@@ -8,11 +8,11 @@ public class LinkStateRouter {
 
 	public static void parseString(String parsedString) {
 		List<Router> uniqueNodes = new ArrayList<Router>();
-		
+
 		// Remove the whitespace from the argument and split each chunk of input
 		parsedString = parsedString.replaceAll("\\s", "");
 		String[] nodes = parsedString.split(";");
-		
+
 		// Scan through all of the input and check for errors
 		for (int i = 0; i < nodes.length; i++) {
 			Scanner scanner = new Scanner(nodes[i]);
@@ -25,8 +25,9 @@ public class LinkStateRouter {
 					System.err.println("The string is improperly formatted.");
 					break;
 				}
-				
-				// If no errors exist with the input then check if either of the nodes exist in the input chunk
+
+				// If no errors exist with the input then check if either of the
+				// nodes exist in the input chunk
 				boolean nodeAExists = false;
 				boolean nodeBExists = false;
 				for (Router router : uniqueNodes) {
@@ -39,16 +40,14 @@ public class LinkStateRouter {
 						nodeBExists = true;
 					}
 				}
-				
-				if(!nodeAExists) {
+
+				if (!nodeAExists) {
 					uniqueNodes.add(new Router(nodeId_A).connectsTo(nodeId_B).withHopLength(hopLength).add());
 				}
-				
-				if(!nodeBExists) {
+
+				if (!nodeBExists) {
 					uniqueNodes.add(new Router(nodeId_B).connectsTo(nodeId_A).withHopLength(hopLength).add());
 				}
-				
-				
 
 			} catch (InputMismatchException ime) {
 				System.err.print(scanner.next());
@@ -59,14 +58,14 @@ public class LinkStateRouter {
 				scanner.close();
 			}
 		}
-		for(Router router: uniqueNodes) {
-			System.out.println("Router: " + router.threadId);
-			for(String str: router.connecters.keySet()) {
-				System.out.println(str + "   " + router.connecters.get(str));
+		for (Router router : uniqueNodes) {
+			System.out.println("Router: " + router.nodeId());
+			for (String str : router.linkStataePacket.keySet()) {
+				System.out.println(str + "   " + router.linkStataePacket.get(str));
 			}
-			System.out.println();
+			System.out.println(router +"\n");
 		}
-		
+
 	}
 
 	public static void main(String[] args) {
